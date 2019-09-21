@@ -2,16 +2,20 @@
   "name": "back-end",
   "version": "1.0.0",
   "description": "This is the backend application for the Scheduler App",
-  "main": "server.js",
+  "main": "index.js",
   "repository": "https://github.com/schedulerIt/back-end.git",
   "author": "Ernesto Pena <ernestopenad@gmail.com>",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "server": "nodemon index.js"
+  },
   "dependencies": {
     "bcrypt": "^3.0.6",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "knex": "^0.19.4",
+    "nodemon": "^1.19.2",
     "pg": "^7.12.1"
   }
 }

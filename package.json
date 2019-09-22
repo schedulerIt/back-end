@@ -9,11 +9,10 @@
   "private": false,
   "scripts": {
     "server": "nodemon index.js",
-    "start":"node index.js"
+    "start": "node index.js"
   },
-
   "engines": {
-    "node":"10.0"
+    "node": "8.10.0"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",

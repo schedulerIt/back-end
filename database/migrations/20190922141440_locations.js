@@ -9,7 +9,7 @@ exports.up = function(knex) {
       table.integer('managerid').notNullable().references('id').inTable('users')
            .onDelete('RESTRICT')
            .onUpdate('CASCADE');
-      table.string('telephone', 11).notNullable();     
+      table.string('telephone', 30).notNullable();     
   })
 };
 

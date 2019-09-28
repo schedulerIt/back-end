@@ -1,10 +1,7 @@
 const faker = require('faker');
-
+var fakeAccounts = []
 function fakeAccount() {
-
-  const date = new Date();
-
-  const account = {
+  var account = {
     accountid: faker.random.number(),
     createdat: faker.date.recent(),
     updatedat: faker.date.recent()
@@ -12,19 +9,18 @@ function fakeAccount() {
    return account;        
 }
 
+
 exports.seed = function(knex) {
   // Deletes ALL existing entries
   return knex('accounts').del()
     .then(function () {
-
-      const fakeAccounts = [];
-
-      for (let i = 1; i< 10; i++) {
+      for (let i = 0; i < 2; i++) {
           fakeAccounts.push(fakeAccount());
-          console.log(fakeAccounts);
       }
 
       // Inserts seed entries
       return knex('accounts').insert(fakeAccounts);
     });
 };
+
+

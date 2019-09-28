@@ -4,6 +4,7 @@ const db = require('./accountdb');
 
 const router = express.Router();
 
+//GET TO PETCH ALL ACCOUNT RECORDS
 router.get('/', async (req, res) => {
     try {
         const accountData = await db.find();
@@ -14,4 +15,16 @@ router.get('/', async (req, res) => {
     }
 })
 
+
+//POST TO ADD A NEW ACCOUNT. 
+//THIS ENDPOINT IS A BIT DIFFICULT BECAUSE IT WILL TRIGGER AFTER REGISTRATION
+router.post('/', newAccount, async (req , res)=> {
+    
+})
+
 module.exports = router;
+
+//MIDDLEWARE TO CREATE A NEW ACCOUNT
+async function newAccount() {
+
+}

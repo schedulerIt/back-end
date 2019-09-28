@@ -12,7 +12,7 @@ exports.up = function(knex) {
         table.string('email', 100).notNullable().unique();
         table.string('passwordhash').notNullable();
         table.string('password').notNullable();
-        table.string('telephone',11);
+        table.string('telephone',30);
         table.string('tel_extension', 10);
         table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
         table.timestamp('updated_at').notNullable().defaultTo(knex.fn.now());

@@ -1,56 +1,69 @@
 const faker = require('faker');
+const db = require('../../accounts/accountdb.js');
 
-const db = require('../db_config');
+//PROMISE TO GET THE ACCOUNTS
+function asisi() {
+  return returnsQueryBuilder = new Promise((resolve,reject) => {
+    resolve(db.find());
+  });
+}
+  
+//PROMISE TO ITERATE THRU THE ACCOUNTS AND CREATE 4 USERS PER ACCOUNT
+let users = function(account) {
+  return new Promise(function(resolve , reject) {
+        var userbatch = [];
+        
+        let arraysize = [];
 
-function generateusers(account) {
-  for (let i = 1; i < 4; i++) {
+        for (let i = 0; i < Object.keys(account).length; i++) {
+          var fakerarray = [];
+          for (let j = 0; j < 4; j++) {
+            console.log(account[i]['id'])
+            userbatch = {
+                accountid : parseInt(account[i]['id']),
+                picture : faker.image.avatar(),
+                firstname : faker.name.firstName(),
+                lastname : faker.name.lastName(),
+                email : faker.internet.email(),
+                passwordhash : faker.random.number(),
+                password: "password1234",
+                telephone: faker.phone.phoneNumber(),
+                tel_extension: "",
+                created_at : faker.date.recent(),
+                updated_at : faker.date.recent(),
+                inactive : "true",
+                allowlogin : "true" 
+              }
+            fakerarray = [...fakerarray, userbatch];
+          } 
 
-    const userbatch = {
-      accountid : account,
-      image : faker.image.avatar(),
-      firstName : faker.name.firstName(),
-      lastName : faker.name.lastName(),
-      email : faker.internet.email(),
-      passwordhash : faker.random.number(),
-      password: "password1234",
-      telephone : faker.phone.phoneNumber(),
-      telephone_ext : "",
-      registrationDate : faker.date.recent(),
-      inactive : "true",
-      allowogin : "true" 
-    }
+          arraysize= arraysize.concat(fakerarray);
 
-    return userbatch;
+        }  
+        resolve(arraysize);
+    })
   }
   
-}
-
-
-// function user() {
-//   const users = [];
-  
-//   for (let i = 1; i < Object.keys(query).length; i++) {
-//     console.log(Object.keys(query).length)
-//     users = users.push(generateusers(Object.keys(query)[i]));
-//    }
-//   return users;
-// }
-
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('users').del()
-    .then(function () {
-      // Inserts seed entries
-      const query = db('accounts').select('accountid');
-      console.log('this is my query ', [query]) 
-
-
-
-      console.log('inside seed function');
-      
-      const finalusers = user();
-
-      return knex('users').insert(user());
-     
-    });
+  return asisi().then(function(account) {
+        return users(account);
+      }).then(function(account) {
+           // Deletes ALL existing entries 
+           knex('users').del()
+           return account;
+      }).then(function (account) { 
+        console.log('my last promise: ', account)
+        return knex('users').insert(account);
+    })
 };
+
+
+
+
+
+
+
+
+
+
+

@@ -6,8 +6,10 @@ server.use(express.json());
 
 //ROUTER DECLARATIONS
 const accountRouter = require('../accounts/router.js');
+const registrationRouter = require('../registration/registration.js');
 
 server.use('/accounts', accountRouter);
+server.use('/registration' , registrationRouter);
 
 
 

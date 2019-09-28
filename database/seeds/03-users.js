@@ -1,12 +1,19 @@
 const faker = require('faker');
-const db = require('../../accounts/accountdb.js');
+const dbAccounts = require('../../accounts/accountdb.js');
 
 //PROMISE TO GET THE ACCOUNTS
 function asisi() {
   return returnsQueryBuilder = new Promise((resolve,reject) => {
-    resolve(db.find());
+    resolve(dbAccounts.find());
   });
 }
+
+//PROMISE TO GET LOCATIONS
+function getlocations() {
+  return new Promise(function(resolve , reject) {
+    resolve(dblocation.find());
+  }
+  )}
   
 //PROMISE TO ITERATE THRU THE ACCOUNTS AND CREATE 4 USERS PER ACCOUNT
 let users = function(account) {

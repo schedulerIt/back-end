@@ -6,8 +6,8 @@ exports.up = function(knex) {
       table.string('city', 100).notNullable();
       table.string('state', 100).notNullable();
       table.string('zipcode').notNullable();
-      table.string('telephone', 11).notNullable();  
-      table.integer('locationid').references('id').inTable('accounts').notNullable()
+      table.string('telephone', 30).notNullable();  
+      table.integer('accountid').references('id').inTable('accounts').notNullable()
            .onDelete('RESTRICT')
            .onUpdate('CASCADE');   
   })

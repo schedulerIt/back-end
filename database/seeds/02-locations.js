@@ -1,13 +1,30 @@
 
-exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('table_name').del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
-      ]);
-    });
-};
+const db = require('../../accounts/accountdb.js');
+const faker = require('faker');
+
+function accounts() {
+  return new Promise(function(resolve , reject) {
+    resolve(db.find());
+  })
+}
+
+function locations(accounts) {
+  return new Promise(function(resolve , reject) {
+     var locationBatch = [];
+     var locationObject = [];
+
+    for (let i = 0; i < Object.keys(accounts).length ; i++) {
+      locationBatch = {
+          accountid = accounts[i]['id'],
+          address: faker.address(),
+          state: faker.usState(),
+          state: faker.city(),
+          zipCode: faker.zipCode(),
+          telephone: faker.telephone(),
+          description: faker.paragraph()
+    }
+    
+    locationObject = [...locationObject, locationBatch];
+        }
+  })
+}

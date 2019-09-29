@@ -1,4 +1,3 @@
-
 const db = require('../../accounts/accountdb.js');
 const faker = require('faker');
 

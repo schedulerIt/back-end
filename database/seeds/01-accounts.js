@@ -11,16 +11,10 @@ function fakeAccount() {
 
 
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('accounts').del()
-    .then(function () {
       for (let i = 0; i < 2; i++) {
           fakeAccounts.push(fakeAccount());
       }
-
-      // Inserts seed entries
       return knex('accounts').insert(fakeAccounts);
-    });
 };
 
 

@@ -14,16 +14,23 @@ function locations(accounts) {
 
     for (let i = 0; i < Object.keys(accounts).length ; i++) {
       locationBatch = {
-          accountid = accounts[i]['id'],
-          address: faker.address(),
-          state: faker.usState(),
-          state: faker.city(),
-          zipCode: faker.zipCode(),
-          telephone: faker.telephone(),
-          description: faker.paragraph()
+          accountid: accounts[i]['id'],
+          address: faker.address.streetAddress(),
+          state: faker.address.state(),
+          city: faker.address.city(),
+          zipcode: faker.address.zipCode(),
+          telephone: faker.phone.phoneNumber()
     }
-    
-    locationObject = [...locationObject, locationBatch];
+     locationObject = [...locationObject, locationBatch];
         }
+        resolve(locationObject);
   })
 }
+
+exports.seed = function(knex) {
+  return accounts().then(function(account) {
+        return locations(account);
+      }).then(function (account) { 
+        return knex('locations').insert(account);
+    })
+};

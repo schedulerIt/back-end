@@ -6,10 +6,10 @@ exports.up = function(knex) {
       table.string('city', 100).notNullable();
       table.string('state', 100).notNullable();
       table.string('zipcode').notNullable();
-      table.integer('managerid').notNullable().references('id').inTable('users')
+      table.string('telephone', 30).notNullable();  
+      table.integer('accountid').references('id').inTable('accounts').notNullable()
            .onDelete('RESTRICT')
-           .onUpdate('CASCADE');
-      table.string('telephone', 30).notNullable();     
+           .onUpdate('CASCADE');   
   })
 };
 
